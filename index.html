@@ -37,136 +37,51 @@
   <title>𝒫𝓁𝒶𝓉𝑒𝓇𝒾𝒶 𝐿&𝑅</title>
 </head>
 <body>
-  <nav>
-    <img style="width: 20px;" src="./icons/icon_menu.svg" alt="menu" class="menu">
 
-    <div class="navbar-left">
-      <img src="./logos/lyr-gold.png" alt="logo" class="logo">
+<nav>
+  <img style="width: 20px;" src="./icons/icon_menu.svg" alt="menu" class="menu">
 
-      <ul>
-        <li>
-          <a href="./index.html" id="bodos">Todos</a>
-        </li>
-        <li>
-          <a id="bicicletas">Bicicletas</a>
-        </li>
-        <li>
-          <a id="accesorios">Accesorios</a>
-        </li>
-        <li>
-          <a id="vehiculos">Vehículos</a>
-        </li>
-        <li>
-          <a id="ejercicio">Ejercicio</a>
-        </li>
-        <li>
-          <a id="ropa">Ropa</a>
-        </li>
-      </ul>
-    </div>
+  <div class="navbar-left">
+    <img src="./logos/lyr-gold.png" alt="logo" class="logo">
 
-    <div class="button-action-container">
-      <a href="tel:+573144537830" class="text-desktop">Contáctanos</a>
-      <a href="tel:+573144537830" class="text-mobile"><img style="width: 20px;" src="./icons/cell.svg" alt="llamada"></a>
-    </div>
-
-
-    
-    <div class="desktop-menu inactive">
-      <ul>
-        <li>
-          <a href="/" class="title">Promociones</a>
-        </li>
-  
-        <li>
-          <a href="/">Mi cuenta</a>
-        </li>
-  
-        <li>
-          <a href="./html/menuAccount.html">Cerrar sesión</a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="mobile-menu inactive">
-      <ul>
-        <li>
-          <h3>CATEGORIES</h3>
-        </li>
-        <li>
-          <a href="index.html" id="todos-mobile">Todos</a>
-        </li>
-        <li>
-          <a id="bicicletas-mobile">Bicicletas</a>
-        </li>
-        <li>
-          <a id="accesorios-mobile">Accesorios</a>
-        </li>
-        <li>
-          <a id="vehiculos-mobile">Vehículos</a>
-        </li>
-        <li>
-          <a id="ejercicio-mobile">Ejercicio</a>
-        </li>
-        <li>
-          <a id="ropa-mobile">Ropa</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <aside id="shoppingCartContainer" class="inactive"> <!-- programar scroll interno-->
-    <div class="title-container">
-      <p class="title">Mi pedido</p>
-    </div>
-
-    <div class="my-order-content">
-      <div class="shopping-cart">
-        <figure>
-          <img src="https://sc04.alicdn.com/kf/H5552b14c5cb64444b4bb03e2c38c78daR/230831424/H5552b14c5cb64444b4bb03e2c38c78daR.jpg" alt="Ropar deportiva">
-        </figure>
-        <p>Ropar deportiva</p>
-        <p>$300000</p>
-        <img src="./icons/icon_close.png" alt="close">
-      </div>
-
-      <div class="shopping-cart">
-        <figure>
-          <img src="https://m.media-amazon.com/images/I/61oJq0KTUmL._AC_SX466_.jpg" alt="ropa">
-        </figure>
-        <p>zapatos</p>
-        <p>$600000</p>
-        <img src="./icons/icon_close.png" alt="close">
-      </div>
-
-      <div class="order">
-        <p>
-          <span>Total</span>
-        </p>
-        <p>$900000</p>
-      </div>
-
-      <button class="primary-button">
-        realizar compra
-      </button>
-    </div>
+    <ul id="desktop-categories" class="navbar-categories">
+      <!-- Aquí se insertarán las categorías -->
+    </ul>
   </div>
-  </aside>
 
-  <aside id="productDetail" class="inactive">
-    <div class="product-detail-close">
-      <img src="./icons/icon_close.png" alt="close">
-    </div>
-    <img src="https://fuelcarmagazine.com/wp-content/uploads/2022/10/Alpine-bicicleta-768x403.jpg" alt="bike">
-    <div class="product-info">
-      <p>$35,00</p>
-      <p>Bike</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, repellat molestiae! Iste nisi, est cupiditate voluptates voluptatum, vitae qui sed sapiente iure obcaecati eligendi recusandae, et id molestiae omnis non.</p>
-      <button class="primary-button add-to-cart-button">
-        Add to cart
-      </button>
-    </div>
-  </aside>
+  <div class="button-action-container">
+    <a href="tel:+573144537830" class="text-desktop">Contáctanos</a>
+    <a href="tel:+573144537830" class="text-mobile">
+      <img style="width: 20px;" src="./icons/cell.svg" alt="llamada">
+    </a>
+  </div>
+
+  <div class="desktop-menu inactive">
+    <ul>
+      <li><a href="/" class="title">Promociones</a></li>
+      <li><a href="/">Mi cuenta</a></li>
+      <li><a href="./html/menuAccount.html">Cerrar sesión</a></li>
+    </ul>
+  </div>
+
+  <div class="mobile-menu inactive">
+    <ul id="mobile-categories" class="navbar-categories-mobile">
+      <li><h3>CATEGORIES</h3></li>
+      <!-- Aquí se insertarán las categorías móviles -->
+    </ul>
+  </div>
+</nav>
+
+
+<aside id="productDetail" class="inactive">
+  <div class="product-detail-close">
+    <img src="./icons/icon_close.png" alt="close">
+  </div>
+  <!-- Este contenedor será llenado dinámicamente -->
+  <div id="productDetailContent"></div>
+</aside>
+
+
 
     <div class="first-container">
       <div class="first-container-presentation">
@@ -206,7 +121,10 @@
   
   </section>
 
-  <footer style="width: calc(100% - 48px); padding: 24px; text-align: center; background: black;"><a style="color: aliceblue; text-decoration: none;" href="https://jorgeisaac.vercel.app/">Página web desarrollado por: <br> <span style="text-decoration: none; font-family: 'Great Vibes', cursive; color: var(--color-11); font-size: var(--text-3);">Jorge Isaac</span> </a></footer>
+  <footer style="width: calc(100% - 48px); padding: 24px; text-align: center; background: black; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+    <img src="./logos/lyr-gold.png" alt="logo" class="logo">
+    <a style="color: aliceblue; text-decoration: none;" href="https://jorgeisaac.vercel.app/">Página web desarrollado por: <br> <span style="text-decoration: none; font-family: 'Great Vibes', cursive; color: var(--color-11); font-size: var(--text-3);">Jorge Isaac</span> </a>
+  </footer>
 
   <script src="main.js"></script>
 

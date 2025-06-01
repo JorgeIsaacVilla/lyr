@@ -5,11 +5,9 @@ const menuHamIcon = document.querySelector(".menu");
 const mobileMenu = document.querySelector(".mobile-menu");
 const productDetailCloseIncon = document.querySelector(".product-detail-close");
 
-const menuCarritoICon = document.querySelector(".navbar-shopping-cart");
-const productDetailContainer = document.querySelector("#productDetail")
+const productDetailContainer = document.querySelector("#productDetail");
 
 const cardsContainer = document.querySelector(".cards-container");
-
 
 const todos = document.querySelector("#todos");
 const bicicletas = document.querySelector("#bicicletas");
@@ -18,7 +16,6 @@ const vehiculos = document.querySelector("#vehiculos");
 const ejercicio = document.querySelector("#ejercicio");
 const ropa = document.querySelector("#ropa");
 
-
 const todosMobile = document.querySelector("#todos-mobile");
 const bicicletasMobile = document.querySelector("#bicicletas-mobile");
 const accesoriosMobile = document.querySelector("#accesorios-mobile");
@@ -26,73 +23,46 @@ const vehiculosMobile = document.querySelector("#vehiculos-mobile");
 const ejercicioMobile = document.querySelector("#ejercicio-mobile");
 const ropaMobile = document.querySelector("#ropa-mobile");
 
+menuHamIcon.addEventListener("click", toggleMobileMenu);
 
-menuHamIcon.addEventListener("click", toggleMobileMenu );
 productDetailCloseIncon.addEventListener("click", closeProductDetailAside);
 
-function toggleDesktopMenu () {
-    const isAsideClosed = shoppingCartContainer.classList.contains("inactive");
-
-    if(!isAsideClosed){
-        shoppingCartContainer.classList.toggle("inactive");
-    }
-
-    desktopMenu.classList.toggle("inactive");
+function toggleMobileMenu() {
+  closeProductDetailAside();
+  mobileMenu.classList.toggle("inactive");
 }
 
-function toggleMobileMenu () {
-    const isAsideClosed = shoppingCartContainer.classList.contains("inactive");
-    
-    if(!isAsideClosed){
-        shoppingCartContainer.classList.add("inactive");
-    }
+function openProductDetailAside(productId) {
+  const product = productList.find(p => p.id === productId);
+  if (!product) return;
 
-    closeProductDetailAside();
+  productDetailContainer.classList.remove("inactive");
 
-    mobileMenu.classList.toggle("inactive");
+  const content = `
+    <img src="${product.image}" alt="${product.name}">
+    <div class="product-info">
+      <p>$${product.price}</p>
+      <p>${product.name}</p>
+      <p>${product.descri}</p>
+      <button class="primary-button add-to-cart-button">
+        Add to cart
+      </button>
+    </div>
+  `;
+
+  document.getElementById("productDetailContent").innerHTML = content;
 }
 
-function toggleCarritoAside () {
-    const isMobileMenuClosed = mobileMenu.classList.contains("inactive");
 
-    if(!isMobileMenuClosed){
-        mobileMenu.classList.add("inactive");
-    }
-
-    const isProductDetailClosed = productDetailContainer.classList.contains("inactive");
-
-    if(!isProductDetailClosed){
-        productDetailContainer.classList.add("inactive");
-    }
-
-    shoppingCartContainer.classList.toggle("inactive");
-}
-
-function openProductDetailAside () {// ya saque el id, solo falta que el elemento se imprima en la seccion con los valores correspondientes.
-
-
-    shoppingCartContainer.classList.add("inactive");
-    productDetailContainer.classList.remove("inactive");
-
-
-    const productCards = document.querySelectorAll(".product-card");
-    productCards.forEach(card => {
-        card.addEventListener("click", () => {
-          const productId = card.getAttribute("data-product-id");
-          openProductDetailAside(productId);
-        });
-      });
-      
-      function openProductDetailAside(productId) {
-        console.log("ID del producto:", productId); // obtengo el ID del producto
-      }
-
+function closeProductDetailAside() {
+  productDetailContainer.classList.add("inactive");
 }
 
 
 function closeProductDetailAside () {
     productDetailContainer.classList.add("inactive");
 }
+
 
 const productList = [];
     productList.push({
@@ -563,122 +533,137 @@ const productList = [];
         type: "Aretes",
     });
 
-function renderProducts(arr){
 
-    for (product of arr) {
-        /*
-        div class="product-card" data-product-id="1">
-        <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=">
-        <div class="product-info">
-          <div>
-            <p>$120,00</p>
-            <p>Bike</p>
-          </div>
-          <figure>
-            <img src="./icons/bt_add_to_cart.svg" alt=">
-          </figure>
-        </div>
-      </div>
-        */
-      const productCard =  document.createElement("div"); /*para crear un div con la clase product-card */
-      productCard.classList.add("product-card"); /*esta liena es para agregarle la class="product-card creada en la anterior linea" */
-      productCard.setAttribute("data-product-id", product.id);/*Asignar el atributo data-product-id al elemento */
+function renderProducts(arr) {
+  cardsContainer.innerHTML = ""; // Limpia antes de renderizar
 
-      
+  for (const product of arr) {
+    const productCard = document.createElement("div");
+    productCard.classList.add("product-card");
+    productCard.setAttribute("data-product-id", product.id);
 
-      const productImg = document.createElement("img");
-      productImg.setAttribute("src", product.image);
-      productImg.addEventListener("click", openProductDetailAside);
+    const productImg = document.createElement("img");
+    productImg.setAttribute("src", product.image);
+    productImg.addEventListener("click", openProductDetailAside);
 
-      const productInfo=  document.createElement("div"); /*para crear un div con la clase productinfo */
-      productInfo.classList.add("product-info"); /*esta liena es para agregarle la class="product-info creada en la anterior linea" */
+    const productInfo = document.createElement("div");
+    productInfo.classList.add("product-info");
 
-      const productInfoDiv =  document.createElement("div"); /*para crear un div con la clase product-info-div */
+    const productInfoDiv = document.createElement("div");
+    const productPrice = document.createElement("p");
+    productPrice.innerText = "$" + product.price;
+    const productName = document.createElement("p");
+    productName.innerText = product.name;
 
-      const productPrice = document.createElement("p");
-      productPrice.innerText = "$"+ product.price;
-      const productName = document.createElement("p");
-      productName.innerText = product.name;
+    productInfoDiv.appendChild(productPrice);
+    productInfoDiv.appendChild(productName);
 
-      productInfoDiv.appendChild(productPrice);/*Esto es para decirle al algoritmo que meta  productPrice dentro de productInfoDiv */
-      productInfoDiv.appendChild(productName);/*Esto es para decirle al algoritmo que meta  productName dentro de productInfoDiv */
+    productInfo.appendChild(productInfoDiv);
 
-      const productInfoFigure = document.createElement("figure");
-      const productImgCart = document.createElement("figure");
-      productImgCart.setAttribute("src", "./icons/bt_add_to_card.svg");
-      
-      productInfoFigure.appendChild(productImgCart); /* esto es para decirle al algoritmo que meta productImgCart dentro de productInfoFigure*/
+    // 🔘 Crear botón real
+    const askButton = document.createElement("button");
+    askButton.classList.add("ask-button");
+    askButton.innerText = "Pregunta por WhatsApp";
 
-      productInfo.appendChild(productInfoDiv); /*Esto es para decirle al algoritmo que meta  productInfoDiv dentro de productInfo */
-      productInfo.appendChild(productInfoFigure);/*Esto es para decirle al algoritmo que meta  productInfoFigure dentro de productInfo */
+    askButton.addEventListener("click", () => {
+      window.location.href = `https://wa.me/573144537830?text=Hola, quiero más información sobre el producto: ${product.name}`;
+    });
 
-      productCard.appendChild(productImg);
-      productCard.appendChild(productInfo);
+    productCard.appendChild(productImg);
+    productCard.appendChild(productInfo);
+    productCard.appendChild(askButton);
 
-      cardsContainer.appendChild(productCard);
-    }
+    cardsContainer.appendChild(productCard);
+  }
 }
+
+
+
+
+/*Crear categorías he integrarlas en versión movile y desk de manera dinamica (inicio) */
+
+//id:"en minuscula", label:"En mayuscula (Esto e slo que saldrá en el HTML)"
+const categorias = [
+  { id: "todos", label: "Todos" },
+  { id: "aretes", label: "Aretes" },
+  { id: "cadenas", label: "Cadenas" },
+  { id: "anillos", label: "Anillos" },
+  { id: "dijes", label: "Dijes" },
+  { id: "puliceras", label: "Pulceras" },
+];
+
+const desktopCategoriesContainer = document.getElementById("desktop-categories");
+const mobileCategoriesContainer = document.getElementById("mobile-categories");
+
+categorias.forEach(categoria => {
+  // Crear elemento para desktop
+  const liDesktop = document.createElement("li");
+  const aDesktop = document.createElement("a");
+  aDesktop.id = categoria.id;
+  aDesktop.textContent = categoria.label;
+  aDesktop.href = "#";
+  liDesktop.appendChild(aDesktop);
+  desktopCategoriesContainer.appendChild(liDesktop);
+
+  // Crear elemento para mobile
+  const liMobile = document.createElement("li");
+  const aMobile = document.createElement("a");
+  aMobile.id = `${categoria.id}-mobile`;
+  aMobile.textContent = categoria.label;
+  aMobile.href = "#";
+  liMobile.appendChild(aMobile);
+  mobileCategoriesContainer.appendChild(liMobile);
+});
+
+categorias.forEach(categoria => {
+  const desktopLink = document.getElementById(categoria.id);
+  const mobileLink = document.getElementById(`${categoria.id}-mobile`);
+
+  const filtrarCategoria = () => {
+    const filteredProducts = categoria.id === "todos"
+      ? productList
+      : productList.filter(product => product.type.toLowerCase() === categoria.id);
+
+    cardsContainer.innerHTML = "";
+    renderProducts(filteredProducts);
+  };
+
+  if (desktopLink) desktopLink.addEventListener("click", filtrarCategoria);
+  if (mobileLink) mobileLink.addEventListener("click", filtrarCategoria);
+});
+/*Crear categorías he integrarlas en versión movile y desk de manera dinamica (inicio) */
 
 /*para filtrar (inicio) */
 
-ropa.addEventListener("click", filtrarRopa);
-ropaMobile.addEventListener("click", filtrarRopa);
+categorias.forEach(categoria => {
+  const desktopLink = document.getElementById(categoria);
+  const mobileLink = document.getElementById(`${categoria}-mobile`);
 
-function filtrarRopa(){
-    const filteredProducts = productList.filter(product => product.type === "ropa");
-    
-    console.log(filteredProducts);
-    cardsContainer.innerHTML=""
+  const filtrarCategoria = () => {
+    const filteredProducts = categoria === "todos"
+      ? productList
+      : productList.filter(product => product.type.toLowerCase() === categoria);
+
+    cardsContainer.innerHTML = "";
     renderProducts(filteredProducts);
-}
+  };
 
-
-accesorios.addEventListener("click", filtrarAccesorios);
-accesoriosMobile.addEventListener("click", filtrarAccesorios);
-
-function filtrarAccesorios(){
-    const filteredProducts = productList.filter(product => product.type === "accesorios");
-    
-    console.log(filteredProducts);
-    cardsContainer.innerHTML=""
-    renderProducts(filteredProducts);
-}
-
-
-bicicletas.addEventListener("click", filtrarBicicletas);
-bicicletasMobile.addEventListener("click", filtrarBicicletas);
-
-function filtrarBicicletas(){
-    const filteredProducts = productList.filter(product => product.type === "bicicletas");
-    
-    console.log(filteredProducts);
-    cardsContainer.innerHTML=""
-    renderProducts(filteredProducts);
-}
-
-
-vehiculos.addEventListener("click", filtrarVehiculos);
-vehiculosMobile.addEventListener("click", filtrarVehiculos);
-
-function filtrarVehiculos(){
-    const filteredProducts = productList.filter(product => product.type === "vehiculos");
-    
-    console.log(filteredProducts);
-    cardsContainer.innerHTML=""
-    renderProducts(filteredProducts);
-}
-
-
-ejercicio.addEventListener("click", filtrarEjercicio);
-ejercicioMobile.addEventListener("click", filtrarEjercicio);
-
-function filtrarEjercicio(){
-    const filteredProducts = productList.filter(product => product.type === "ejercicio");
-    
-    console.log(filteredProducts);
-    cardsContainer.innerHTML=""
-    renderProducts(filteredProducts);
-}
+  if (desktopLink) desktopLink.addEventListener("click", filtrarCategoria);
+  if (mobileLink) mobileLink.addEventListener("click", filtrarCategoria);
+});
 
 /*para filtrar (fin) */
+
+
+// Esta parte DEBE ejecutarse después de renderProducts()
+document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("click", (e) => {
+    if (e.target.closest(".product-card")) {
+      const card = e.target.closest(".product-card");
+      const productId = card.getAttribute("data-product-id");
+      openProductDetailAside(productId);
+    }
+  });
+});
+
 renderProducts(productList);
